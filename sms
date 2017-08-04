@@ -10,8 +10,9 @@ require "http"
 
 data = []
 
-puts "Drag CSV file here"
-path = Pathname.new(gets.chomp.gsub("'","").strip!)
+#this is a comment
+
+path = Pathname.new("Message.csv")
 puts path.to_s
 csv_text = File.read(path)
 csv = CSV.parse(csv_text, :headers => true)
@@ -19,8 +20,7 @@ csv.each do |row|
   data << {mob: row[0], name: row[1], account: row[2]}
 end
 
-puts "Drag TXT file containg the sms body here"
-path = Pathname.new(gets.chomp.gsub("'","").strip!)
+path = Pathname.new("body.txt")
 text = File.read(path)
 
 
