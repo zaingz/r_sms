@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+
+
+require 'csv'
+require "pathname"
+require "http"
+
+data = []
+
+puts "Drag CSV file here"
+path = Pathname.new(gets.chomp.gsub("'","").strip!)
+puts path.to_s
+csv_text = File.read(path)
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  data << {mob: row[0], name: row[1], account: row[2]}
+end
+
+puts "Drag TXT file containg the sms body here"
+path = Pathname.new(gets.chomp.gsub("'","").strip!)
+text = File.read(path)
+
+
+
+
+puts "How many SMS you want to send in a minute"
+sms_pm = gets.chomp.to_i
+
+data.each_slice(sms_pm) do |slice|
+  slice.each do |row|
+    msg = %(
+Dear #{row[:name]},
+Account # #{row[:account]}
+#{text}
+)
+
+  Thread.new do
+    h = HTTP.post("https://api.zipwhip.com/messaging/send",
+    form: {session: "25655890-fa2e-4c0a-a60c-44ae477625be:343254802", to: "1#{row[:mob]}", body: msg} )
+
+    puts "Sms sent to #{row[:mob]}, status: #{eval(h.body.to_s)[:success]}"
+  end
+
+  end
+  sleep(1*60)
+end
