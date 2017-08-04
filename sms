@@ -33,7 +33,7 @@ total_sms = gets.chomp.to_i
 puts "How many SMS you want to send in a minute"
 sms_pm = gets.chomp.to_i
 
-sms_start=-1
+sms_start = sms_start - 1
 
 
 sms_end = sms_start + total_sms
