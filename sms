@@ -1,12 +1,4 @@
-#!/usr/bin/env ruby
 
-require 'rubygems'
-require 'bundler/setup'
-
-
-require 'csv'
-require "pathname"
-require "http"
 
 data = []
 
