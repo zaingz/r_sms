@@ -40,10 +40,15 @@ sms_end = sms_start + total_sms
 
 if sms_end > data.size
   puts "Invalid! , number of records is less"
-  
+  exit!
 end
 
-data[sms_start...sms_end].each_slice(sms_pm) do |slice|
+
+puts "SMS start: #{sms_start}"
+puts "SMS end: #{sms_end}"
+
+
+data[sms_start..sms_end].each_slice(sms_pm) do |slice|
   slice.each do |row|
     msg = %(
 Dear #{row[:name]},
