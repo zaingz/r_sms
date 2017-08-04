@@ -45,10 +45,6 @@ if sms_end > data.size
 end
 
 
-puts "SMS start: #{sms_start}"
-puts "SMS end: #{sms_end}"
-
-
 data[sms_start..sms_end].each_slice(sms_pm) do |slice|
   slice.each do |row|
     msg = %(
