@@ -13,7 +13,7 @@ data = []
 #this is a comment
 
 path = Pathname.new("Message.csv")
-puts "Hola !!!"
+puts "Hola !"
 csv_text = File.read(path)
 csv = CSV.parse(csv_text, :headers => true)
 csv.each do |row|
@@ -37,6 +37,12 @@ sms_start=-1
 
 
 sms_end = sms_start + total_sms
+
+
+puts "SMS start: #{sms_start}"
+puts "SMS end: #{sms_end}"
+
+
 
 if sms_end > data.size
   puts "Invalid! , number of records is less"
