@@ -1,8 +1,4 @@
 
-puts "Program is Deactivated !!!"
-gets.chomp
-exit!
-
 
 data = []
 
